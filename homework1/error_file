@@ -1,0 +1,11 @@
+flag needs an argument: -e
+Usage of ./selpg:
+  -d string
+    	
+  -e int
+    	 (default -1)
+  -f	
+  -l int
+    	 (default 72)
+  -s int
+    	 (default -1)
