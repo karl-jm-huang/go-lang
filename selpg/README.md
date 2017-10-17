@@ -121,7 +121,7 @@ $ ./selpg -s 1 -e  2> error_file
 ```
 ![errorfile](http://img.blog.csdn.net/20171017212738806?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvSDEyNTkwNDAwMzI3/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
 
-8.将命令"ps"的输出的第1页到第3页写至selpg的标准输出（屏幕）；命令"ps"可以替换为任意其他linux行命令，selpg的输出也能成为另一个命令的输入。
+9.将命令"ps"的输出的第1页到第3页写至selpg的标准输出（屏幕）；命令"ps"可以替换为任意其他linux行命令，selpg的输出也能成为另一个命令的输入。
 
 ```
 $ ps | ./selpg -s 1 -e 3
@@ -133,7 +133,7 @@ $ ps | ./selpg -s 1 -e 3
 
 ./selpg: end_page (3) greater than total pages (1), less output than expected
 ```
-9.将selpg的输出传给 cat 命令作为输入执行，cat结果显示在屏幕
+10.将selpg的输出传给 cat 命令作为输入执行，cat结果显示在屏幕
 
 ```
 $ ./selpg -s 1 -e 1 input_file | cat -n
