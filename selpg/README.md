@@ -147,7 +147,6 @@ $ ./selpg -s 1 -e 1 input_file | cat -n
      7  and
      8  i feel
      9  really
-
     10  happy
 ```
 
