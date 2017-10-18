@@ -1,7 +1,8 @@
 ## selpg
 [selpg](https://www.ibm.com/developerworks/cn/linux/shell/clutil/index.html) 是一个自定义命令行程序，全称select page，即从源（标准输入流或文件）读取指定页数的内容到目的地（标准输出流或给给打印机打印）
 
-##参数使用说明
+## 参数使用说明
+
 详细用法请参考 [C语言实现自定义selpg](https://www.ibm.com/developerworks/cn/linux/shell/clutil/index.html)，我这里是为练习go而写的，与原文用法有差异
 
 selpg [-s startPage] [-e endPage] [-l linePerPage | -f] [-d dest] filename
@@ -19,7 +20,9 @@ selpg [-s startPage] [-e endPage] [-l linePerPage | -f] [-d dest] filename
  - -d，~~后面接打印机标号，用于将内容传送给打印机打印~~ 我没有打印机用于测试，所以当使用 -d destination(随便一个字符串作参数)时，就会通过管道把内容发送给 grep命令，并把grep处理结果显示到屏幕
  - filename，唯一一个无标识参数，代表选择读取的文件名
 
-##设计
+
+## 设计
+
 
  - 结构体记录参数对应的值易于处理
  ```
@@ -121,16 +124,23 @@ if sa.printDest != "" {
 
 
 
-### 正确用法示例
+## 正确用法示例
 
 下面的例子中我这里只介绍本程序的用法
 用到的相关文件：
+
 ①input_file为输入文件
+
 ②input_file_f为输入文件，经处理过，每五行以一个分页符 '\f' 结束，用于测试 -f 标志
+
 ③output_file为输出文件
+
 ④error_file为保存程序出错信息的文件
+
 ⑤keyword该文件里面只有i一个字母。
+
 ①②④内容如下，②③初始为空文件
+
 ![这里写图片描述](http://img.blog.csdn.net/20171017200609513?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvSDEyNTkwNDAwMzI3/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
 
 ![input_file_f](http://img.blog.csdn.net/20171018011737363?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvSDEyNTkwNDAwMzI3/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
@@ -267,7 +277,7 @@ $ ./selpg -s 1 -e 1 input_file | cat -n
     10  happy
  ```
 
-### 一些错误用法示例
+## 一些错误用法示例
 命令输入出错时，会提示相应用法
 
 1. 标志缺少参数
