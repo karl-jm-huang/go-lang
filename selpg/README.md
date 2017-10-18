@@ -124,20 +124,20 @@ selpg [-s startPage] [-e endPage] [-l linePerPage | -f] [-d dest] filename
 
 ## 正确用法示例
 
-下面的例子中我这里只介绍本程序的用法
-用到的相关文件：
+   下面的例子中我这里只介绍本程序的用法
+   用到的相关文件：
 
-①input_file为输入文件
+   ①input_file为输入文件
 
-②input_file_f为输入文件，经处理过，每五行以一个分页符 '\f' 结束，用于测试 -f 标志
+   ②input_file_f为输入文件，经处理过，每五行以一个分页符 '\f' 结束，用于测试 -f 标志
 
-③output_file为输出文件
+   ③output_file为输出文件
 
-④error_file为保存程序出错信息的文件
+   ④error_file为保存程序出错信息的文件
 
-⑤keyword该文件里面只有i一个字母。
+   ⑤keyword该文件里面只有i一个字母。
 
-①②⑤内容如下，②③初始为空文件
+   ①②⑤内容如下，②③初始为空文件
 
 ![这里写图片描述](http://img.blog.csdn.net/20171017200609513?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvSDEyNTkwNDAwMzI3/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
 
@@ -205,7 +205,7 @@ selpg [-s startPage] [-e endPage] [-l linePerPage | -f] [-d dest] filename
    ```
    可以看到输出10行，原因是原文件中每五行后面才有一个分页符 '\f' 分割 
 
-6. ~~读取文件输出到打印机打印，~~注意我已经修改了该功能用于测试！！因为我没打印机测试，所以把这功能改为输入到 grep 中，从中找出含有 keyword文件(只含有字母 i)中关键字的内容，并且输出到屏幕上
+6. ~~读取文件输出到打印机打印，~~ 注意我已经修改了该功能用于测试！！因为我没打印机测试，所以把这功能改为输入到 grep 中，从中找出含有 keyword文件(只含有字母 i)中关键字的内容，并且输出到屏幕上
    ```
 	$ ./selpg -s 1 -e 7 -l 1 -d none input_file
 	
