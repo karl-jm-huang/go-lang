@@ -25,9 +25,9 @@ func main() {
 	/** 定义标志参数
 	 *  -s -e -l -f -d
 	 */
-	flag.IntVar(&sa.startPage, "s", -1, "the start page, should >= 1")
-	flag.IntVar(&sa.endPage, "e", -1, "the end page, should >= start page")
-	flag.IntVar(&sa.pageLen, "l", 72, "the paging form, define lines per page")
+	flag.IntVar(&sa.startPage, "s", -1, "the start page")
+	flag.IntVar(&sa.endPage, "e", -1, "the end page")
+	flag.IntVar(&sa.pageLen, "l", 72, "the paging form")
 	flag.StringVar(&sa.printDest, "d", "", "the printer")
 
 	/**检查 -f是否存在，注意 -f 只支持bool类型
@@ -135,15 +135,18 @@ func exeSelpg(sa selpgArgs) {
 				if ferr == io.EOF {
 					if currPage >= sa.startPage && currPage <= sa.endPage {
 						fmt.Fprintf(fout, "%s", page)
+						currPage++
 					}
 				}
 				break
 			}
 			page = strings.Replace(page, "\f", "", -1)
-			currPage++
+
 			if currPage >= sa.startPage && currPage <= sa.endPage {
 				fmt.Fprintf(fout, "%s", page)
+				currPage++
 			}
+
 		}
 
 	}
