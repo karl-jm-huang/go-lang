@@ -38,28 +38,28 @@ type selpgArgs struct {
 
  - 解析命令的标志和对应参数
  
- 当我们输入命令 `$ ./selpg -s 1 -e 6 -f -d dest input_file`时，有三种参数需要获取
- 1.  类似"-s 30"形式，即 标志 + 对应参数值
+   当我们输入命令 `$ ./selpg -s 1 -e 6 -f -d dest input_file`时，有三种参数需要获取
+   1. 类似"-s 30"形式，即 标志 + 对应参数值
       要获取 -s 的参数30，只需调用如下函数
     `flag.IntVar(&sa.startPage, "s", -1, "the start page")`
     上面一行代码定义了标志 s 的默认参数值是 -1，当接受到 "-s 30" 则会把 30 赋值给 sa.startPage，否则把 -1 给sa.startPage
     
- 2. 类似"-f"形式，单独一个标志，不需对应参数值
+   2. 类似"-f"形式，单独一个标志，不需对应参数值
      我们也能通过flag.TypeVar(*val, flag, defaultVal, usage)来定义 -f，但是因为命令行语法的原因，**要识别 -flag ，那么它对应参数的值只能是 bool ，不能是 string int之类的**。
      因此，采用
      `input_f := flag.Bool("f", false, "some usage of -f")` 
      通过上面函数，当命令行有输入 -f 时，input_f (-f 对应的参数)即为true，否则为false
      
      
- 3. 类似"input_file"，没有标志，只有参数
+   3. 类似"input_file"，没有标志，只有参数
      flag.Arg(i) 则表示命令中的无标识参数中的第i的参数值
      因此，通过 `sa.inFilename = flag.Arg(0)` 即能获取该参数
      
      
  - 分页方式的处理
     1. 按行分页 -l pageLe  
- ```
-if sa.pageType == "l" {
+    ```
+	if sa.pageType == "l" {
 		line := bufio.NewScanner(fin)
 		//一行一行读取文件
 		for line.Scan() {
@@ -78,11 +78,11 @@ if sa.pageType == "l" {
 			}
 		}
 	}
- ```
-   2. 按分页符分页 -f
-        根据分页符，先把一页内容读进
- ```
-rd := bufio.NewReader(fin)
+    ```
+    2. 按分页符分页 -f
+       根据分页符，先把一页内容读进
+    ```
+	rd := bufio.NewReader(fin)
 		for {
 			//ReadString每次从当前位置读取，直到遇到换页符'\f'，然后下次从'\f'后面开始继续读取，即每次读一页
 			page, ferr := rd.ReadString('\f')
@@ -103,13 +103,14 @@ rd := bufio.NewReader(fin)
 				currPage++
 			}
 		}
- ```
+   ```
 
  - 通过管道把selpg输出给另一个命令
+ 
    调用函数 `exec.Command("命令名", "该命令的相关参数", ...)` 即可返回获得该命令结构，再调用 cmd.StdinPipe() 可以获得管道的输入管道，然后把我们的 selpg 输出到该管道即可。
    我是把selpg 输出给了命令 grep，查找出selpg的输出中与文件keyword内容相关的部分，再输出到屏幕
- ```
-if sa.printDest != "" {
+   ```
+	if sa.printDest != "" {
 		cmd := exec.Command("grep", "-nf", "keyword")
 		inpipe, err = cmd.StdinPipe()
 		if err != nil {
@@ -120,7 +121,7 @@ if sa.printDest != "" {
 		cmd.Stdout = fout
 		cmd.Start()
 	}
- ```
+   ```
 
 
 
@@ -139,7 +140,7 @@ if sa.printDest != "" {
 
 ⑤keyword该文件里面只有i一个字母。
 
-①②④内容如下，②③初始为空文件
+①②⑤内容如下，②③初始为空文件
 
 ![这里写图片描述](http://img.blog.csdn.net/20171017200609513?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvSDEyNTkwNDAwMzI3/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
 
