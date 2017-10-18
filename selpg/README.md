@@ -7,13 +7,13 @@
 
 selpg [-s startPage] [-e endPage] [-l linePerPage | -f] [-d dest] filename
 
-必需标志以及参数：
+必需标志参数：
 
  - -s，后面接开始读取的页号 int
  - -e，后面接结束读取的页号 int
  s和e都要大于1，并且s <= e，否则提示错误
 
-可选参数
+可选标志参数：
 
  - -l，后面跟行数 int，代表多少行分为一页，不指定 -l 又缺少 -f 则默认按照72行分一页
  - -f，该标志无参数，代表按照分页符'\f' 分页
@@ -22,7 +22,6 @@ selpg [-s startPage] [-e endPage] [-l linePerPage | -f] [-d dest] filename
 
 
 ## 设计
-
 
  - 结构体记录参数对应的值易于处理
    ```
@@ -123,8 +122,6 @@ selpg [-s startPage] [-e endPage] [-l linePerPage | -f] [-d dest] filename
 	}
    ```
 
-
-
 ## 正确用法示例
 
 下面的例子中我这里只介绍本程序的用法
@@ -157,6 +154,7 @@ selpg [-s startPage] [-e endPage] [-l linePerPage | -f] [-d dest] filename
 2. 不指定-l，读取文件，则默认以72行为一页 
    ```
 	$ ./selpg -s 1 -e 6 input_file
+	
 	输出：
 	this
 	is
@@ -175,6 +173,7 @@ selpg [-s startPage] [-e endPage] [-l linePerPage | -f] [-d dest] filename
 3. 从input_file读取其第2—5页的内容，指定每页的行数为 1
    ```
 	$ ./selpg -s 2 -e 5 -l 1 input_file
+	
 	输出：
 	is
 	my
@@ -191,6 +190,7 @@ selpg [-s startPage] [-e endPage] [-l linePerPage | -f] [-d dest] filename
 5. 从input_file_f读取第1—2页内容 ，通过分页符定界，结果输出到屏幕
    ```
 	$ ./selpg -s 1 -e 2 -f input_file_f
+	
 	输出：
 	this is my first go-lang program
 	in fact, i enjoy it
@@ -208,6 +208,7 @@ selpg [-s startPage] [-e endPage] [-l linePerPage | -f] [-d dest] filename
 6. ~~读取文件输出到打印机打印，~~注意我已经修改了该功能用于测试！！因为我没打印机测试，所以把这功能改为输入到 grep 中，从中找出含有 keyword文件(只含有字母 i)中关键字的内容，并且输出到屏幕上
    ```
 	$ ./selpg -s 1 -e 7 -l 1 -d none input_file
+	
 	输出：
 	this
 	is
@@ -225,6 +226,7 @@ selpg [-s startPage] [-e endPage] [-l linePerPage | -f] [-d dest] filename
 7. 定向其输入流为文件
    ```
 	$ ./selpg -s 1 -e 1 < input_file
+	
 	输出：
 	this
 	is
@@ -253,39 +255,43 @@ selpg [-s startPage] [-e endPage] [-l linePerPage | -f] [-d dest] filename
 10. 将命令"ps"的输出的第1页到第3页写至selpg的标准输出（屏幕）；命令"ps"可以替换为任意其他linux行命令，selpg的输出也能成为另一个命令的输入。
     ```
 	$ ps | ./selpg -s 1 -e 3
+	
 	输出：
  	 PID TTY          TIME CMD
 	10011 pts/2    00:00:00 bash
 	10648 pts/2    00:00:00 ps
 	10649 pts/2    00:00:00 selpg
 	./selpg: end_page (3) greater than total pages (1), less output than expected
-   ```
-
+    ```
+   
 11. 将selpg的输出传给 cat 命令作为输入执行，cat结果显示在屏幕
     ```
 	$ ./selpg -s 1 -e 1 input_file | cat -n
+	
 	输出：
-	1  this
-	2  is
-	3  my
-	4  first
-	5  go-lang
-	6  program
-	7  and
-	8  i feel
-	9  really
-	10  happy
+		1  this
+		2  is
+		3  my
+		4  first
+		5  go-lang
+		6  program
+		7  and
+		8  i feel
+		9  really
+		10  happy
     ```
+    可以看到selpg先读取文件，然后把输出给cat，cat在输出结果到屏幕
 
-
+ 
 ## 一些错误用法示例
 
-   命令输入出错时，会提示相应用法
-   
+命令输入出错时，会提示相应用法
+
 1. 标志缺少参数
    ```
 	$ ./selpg -s -l
-        输出：
+	
+	输出：
 	invalid value "-l" for flag -s: strconv.ParseInt: parsing "-l": invalid syntax
 	Usage of ./selpg:
 	-d string
@@ -297,17 +303,21 @@ selpg [-s startPage] [-e endPage] [-l linePerPage | -f] [-d dest] filename
 	-s int
 		(default -1)
    ```
+   
 
 2. 缺少必须标志 -s -l
    ```
 	./selpg -s 1 input_file
+	
 	输出：
 	USAGE: ./selpg [-s start_page] [-e end_page] [ -l lines_per_page | -f ] [ -d dest ] [ in_filename ]
    ```
+   
  
 3. 文件不存在或没权限打开
    ```
 	$ ./selpg -s 1 -e 6 noFile
+	
 	输出：
 	selpg: could not open input file "noFile"
 	open noFile: no such file or directory
