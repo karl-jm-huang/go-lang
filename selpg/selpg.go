@@ -25,10 +25,10 @@ func main() {
 	/** 定义标志参数
 	 *  -s -e -l -f -d
 	 */
-	flag.IntVar(&sa.startPage, "s", -1, "")
-	flag.IntVar(&sa.endPage, "e", -1, "")
-	flag.IntVar(&sa.pageLen, "l", 72, "")
-	flag.StringVar(&sa.printDest, "d", "", "")
+	flag.IntVar(&sa.startPage, "s", -1, "the start page, should >= 1")
+	flag.IntVar(&sa.endPage, "e", -1, "the end page, should >= start page")
+	flag.IntVar(&sa.pageLen, "l", 72, "the paging form, define lines per page")
+	flag.StringVar(&sa.printDest, "d", "", "the printer")
 
 	/**检查 -f是否存在，注意 -f 只支持bool类型
 	 * 默认的，提供了-flag，则对应的值为true
