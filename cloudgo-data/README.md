@@ -1,5 +1,5 @@
 ## 构建数据服务
-使用 xorm 代替 database/sql 修改 [课堂项目](https://github.com/pmlpml/golang-learning/web/cloudgo-data)
+使用 xorm 代替 database/sql 修改 [课堂项目](https://github.com/pmlpml/golang-learning/tree/master/web/cloudgo-data)
 
 从编程效率、程序结构、服务性能等角度对比 database/sql 与 xorm 实现的异同！ 
 
