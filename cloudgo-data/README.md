@@ -71,7 +71,7 @@ Percentage of the requests served within a certain time (ms)
 Finished 1000 requests
 ```
 
-## 改用xorm后测试结果
+### 改用xorm后测试结果
 
 ```
 $ ab -n 1000 -c 200 http://localhost:8080/service/userinfo?userid=
