@@ -41,6 +41,7 @@ curl http://localhost:8080/service/userinfo?userid=
 ```
 
 ## 使用 ab 测试性能
+并发数200，总请求数1000
 
 ### 原项目database/sql的测试结果
 
